@@ -1,7 +1,16 @@
 from typing import List, Dict
+from src.insights.jobs import read
 
 
 def get_unique_industries(path: str) -> List[str]:
+    jobs = read(path)
+    industries_list = set()
+    for job in jobs:
+        if job["industry"]:
+            industries_list.add(job["industry"])
+    return industries_list
+    # outro jeito -> return {jobs["industry"]
+    #                        for jobs in read(path) if jobs["industry"] != ""}
     """Checks all different industries and returns a list of them
 
     Must call `read`
